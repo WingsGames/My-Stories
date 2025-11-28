@@ -1,4 +1,5 @@
 
+
 import { GoogleGenAI, Type, Modality } from "@google/genai";
 import { StoryPage, Language } from "@/types";
 
@@ -75,7 +76,8 @@ export const generateIllustration = async (prompt: string, styleGuide: string): 
     
     const response = await ai.models.generateContent({
       model: "gemini-2.5-flash-image",
-      contents: enhancedPrompt
+      // FIX: Per image generation guidelines, text prompts should be wrapped in the `parts` array.
+      contents: { parts: [{ text: enhancedPrompt }] }
     });
 
     for (const part of response.candidates?.[0]?.content?.parts || []) {

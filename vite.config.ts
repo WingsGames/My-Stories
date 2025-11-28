@@ -5,6 +5,9 @@ import react from '@vitejs/plugin-react';
 export default defineConfig(({ mode }) => {
     const env = loadEnv(mode, '.', '');
     return {
+      // This is the required line for GitHub Pages.
+      // It must match your repository name.
+      base: '/My-Stories/',
       server: {
         port: 3000,
         host: '0.0.0.0',
@@ -16,7 +19,8 @@ export default defineConfig(({ mode }) => {
       },
       resolve: {
         alias: {
-          '@': path.resolve(__dirname, '.'),
+          // FIX: `__dirname` is not available in an ES module context. Use `process.cwd()` to get the project root directory.
+          '@': path.resolve(process.cwd(), '.'),
         }
       }
     };
