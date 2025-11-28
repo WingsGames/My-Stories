@@ -50,7 +50,8 @@ export const generateStoryText = async (
               type: Type.OBJECT,
               properties: {
                 text: { type: Type.STRING, description: "The story text for this page" },
-                imagePrompt: { type: Type.STRING, description: "A visual description for the AI image generator, or empty string if no image for this page", nullable: true }
+                // FIX: Removed `nullable: true` as it's not a valid property in the Gemini API's schema definition.
+                imagePrompt: { type: Type.STRING, description: "A visual description for the AI image generator, or empty string if no image for this page" }
               },
               required: ["text"]
             }
